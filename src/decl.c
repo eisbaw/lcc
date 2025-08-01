@@ -250,7 +250,7 @@ static Symbol dclglobal(int sclass, char *id, Type ty, Coordinate *pos) {
 		p->sclass = sclass;
 	p->type = ty;
 	p->src = *pos;
-	if (t == '=' && isfunc(p->type)) {
+	if (t == '=' && p && p->type && p->type->op == FUNCTION) {
 		error("illegal initialization for `%s'\n", p->name);
 		t = gettok();
 		initializer(p->type, 0);

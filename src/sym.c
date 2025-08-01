@@ -54,8 +54,10 @@ void foreach(Table tp, int lev, void (*apply)(Symbol, void *), void *cl) {
 		Coordinate sav;
 		sav = src;
 		for (p = tp->all; p && p->scope == lev; p = p->up) {
-			src = p->src;
-			(*apply)(p, cl);
+			if (p) {
+				src = p->src;
+				(*apply)(p, cl);
+			}
 		}
 		src = sav;
 	}
